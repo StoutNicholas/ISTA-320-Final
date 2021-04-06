@@ -1,0 +1,75 @@
+---
+title: "Final Project"
+author: "Nicholas Stout"
+date: "3/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(RColorBrewer)
+library(knitr)
+library(stringr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+country_vaccinations <- read_csv("~/Desktop/ISTA 320 Spring 2021/Final Project/data/country_vaccinations.csv")
+country_vaccinations %>%
+  glimpse()
+total_vaccination_per_country <- country_vaccinations %>%
+  mutate(people_fully_vaccinated = replace_na(people_fully_vaccinated, 0)) %>%
+  group_by(country) %>%
+  summarise(people_fully_vaccinated = max(people_fully_vaccinated, na.rm = TRUE), 
+            people_fully_vaccinated_per_hundred =  max(people_fully_vaccinated_per_hundred, na.rm = TRUE)) %>%
+  arrange(- people_fully_vaccinated_per_hundred)
+
+  
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, fig.height= 30}
+total_vaccination_per_country %>%
+  #filter(country %in% c("Argentina", "United States","Mexico")) %>%
+  ggplot(aes(y = reorder(country, people_fully_vaccinated_per_hundred),
+             x = people_fully_vaccinated_per_hundred,
+             fill =country)) +
+  geom_col()+
+  theme(legend.position = "none")
+```
+
+```{r echo=FALSE, fig.height= 30}
+total_vaccination_per_country %>%
+  #filter(country %in% c("Argentina", "United States","Mexico")) %>%
+  ggplot(aes(y = reorder(country, people_fully_vaccinated),
+             x = people_fully_vaccinated,
+             fill =country)) +
+  geom_col()+
+  theme(legend.position = "none")
+```
+
+```{r}
+country_vaccinations %>%
+  filter(country %in% c("Argentina", "United States","Mexico")) %>%
+ggplot(aes(x = date,
+           y = total_vaccinations_per_hundred,
+           group = country,
+           color = country)) +
+             geom_point()+
+  theme(legend.position = "bottom")
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
