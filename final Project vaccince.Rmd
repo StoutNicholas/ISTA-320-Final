@@ -4,7 +4,13 @@ author: "Nicholas Stout"
 date: "3/30/2021"
 output: html_document
 ---
+For this final project, I will be working with the Covide-19 dataset from [Kaggle.com] (https://www.kaggle.com/gpreda/covid-world-vaccination-progress)
 
+The data is inside the `data` folder, and it's called `country_vaccinations.csv`. Alternatively if you wan't you can download a more up-to-date version of the data from the link provided above.
+
+The data set country_vaccinations.csv is a dateset that shows differnt countries around the world with related data about vaccination within those countries so certain dates. The data set has 15 variables or column names. The column names are: country,iso_code, date, total_vaccinations, and so on as you can view from the csv files.  
+
+The Question or questions I am trying to answer with this dateset is "Who are the lead contributors to the vaccination progress?
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(ggthemes)
@@ -14,11 +20,7 @@ library(stringr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
 country_vaccinations <- read_csv("~/Desktop/ISTA 320 Spring 2021/Final Project/data/country_vaccinations.csv")
