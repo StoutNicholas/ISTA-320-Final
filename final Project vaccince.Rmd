@@ -10,7 +10,8 @@ The data is inside the `data` folder, and it's called `country_vaccinations.csv`
 
 The data set country_vaccinations.csv is a dateset that shows differnt countries around the world with related data about vaccination within those countries so certain dates. The data set has 15 variables or column names. The column names are: country,iso_code, date, total_vaccinations, and so on as you can view from the csv files.  
 
-The Question or questions I am trying to answer with this dateset is "Who are the lead contributors to the vaccination progress?
+The question or questions I am trying to answer with this dateset is "What countries are the lead contributors of give out vaccince?" What countries have given out the most vaccines over all?"
+
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(ggthemes)
@@ -20,8 +21,7 @@ library(stringr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-
+The block of code reades in the csv files. Then I created a new dataset that has 155 observations and 3 variables. The three variables are country, people_fully_vaccinated, people_fully_vaccinated_per_hundred. 
 ```{r}
 country_vaccinations <- read_csv("~/Desktop/ISTA 320 Spring 2021/Final Project/data/country_vaccinations.csv")
 country_vaccinations %>%
@@ -38,9 +38,7 @@ total_vaccination_per_country <- country_vaccinations %>%
 
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
+This is the secion with the three blocks of code where I did my dat wrangling.
 
 ```{r pressure, echo=FALSE, fig.height= 30}
 total_vaccination_per_country %>%
@@ -52,6 +50,8 @@ total_vaccination_per_country %>%
   theme(legend.position = "none")
 ```
 
+The first graph created is a horizontal bar graph that shows the reordered countries for people_fully_vaccinated_per_hundred of the x-axis it show the range the all of countries going from 0 to 80. Looking at the plot we can tell that Gibralter has given out about 80 vaccince per hundred people. If we scroll down the plot or look futher down to Unted states we can see that the United States has given out 15 vaccinces per hundred people. 
+
 ```{r echo=FALSE, fig.height= 30}
 total_vaccination_per_country %>%
   #filter(country %in% c("Argentina", "United States","Mexico")) %>%
@@ -61,6 +61,8 @@ total_vaccination_per_country %>%
   geom_col()+
   theme(legend.position = "none")
 ```
+
+The second plot is alos a bar plot but the differnce in this bar plot is that it is looking at all the countries but people_fully_vaccinated, rather that per hundred. the x-axis has the range of from 0e+00 to 5e+07. If we take a closer look at the graph we can tell that the Unted States has given out he most vaccine with India being second and Turkey being third. The United state has given just over 5e+07 vaccince compared to India which ahs given about 1e+06, and. The country that has given ou the least amount of vaccince with the data given is gibraltar with jsut about 0e+00. 
 
 ```{r}
 country_vaccinations %>%
@@ -73,5 +75,6 @@ ggplot(aes(x = date,
   theme(legend.position = "bottom")
 ```
 
+The third and final graph I created is a dotted line graph that compare three countries and the total_vaccinations_per_hundred. The x-axis is the date and the y-axis is the total_vaccinations_per_hundred. I compared Argentina, Mexico, and the United States. On the bottom of the plot ios the legond that shows what color dooted line represnts each country. If we take a look at the plot we can see that the United States has clearly given out the most vaccince per hundred people. The United states has a upward treand that is steadly raising.According to the plot the higest amount of vaccination given per hundred people in the United States was in March when they gave out about 45 vaccince per hundred. The two other countries are about the same for most of the year up unitl february when Argientina starts giving out more vaccince that Mexico. In February Argentina has given out about 13 vaccicne per hundred, while Mexico has give out 12. Once March hit Argentina has peqaked at about 7n or 8 vaccicne per hundred while Mexico has peaked at 6 vaccince per hundred. 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
