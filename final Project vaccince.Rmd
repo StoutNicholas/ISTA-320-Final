@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The block of code reades in the csv files. Then I created a new dataset that has 155 observations and 3 variables. The three variables are country, people_fully_vaccinated, people_fully_vaccinated_per_hundred. 
 ```{r}
-country_vaccinations <- read_csv("~/Desktop/ISTA 320 Spring 2021/Final Project/data/country_vaccinations.csv")
+country_vaccinations <- read_csv("data/country_vaccinations.csv")
 country_vaccinations %>%
   glimpse()
 total_vaccination_per_country <- country_vaccinations %>%
